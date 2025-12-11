@@ -1,0 +1,64 @@
+ :root{
+      --bg: #f7f9fc; 
+      --card: #ffffff; /* カード背景色 */
+      --accent: #0b84ff; /* 強調色（ボタンなど） */
+      --accent-contrast: #ffffff; /* 強調色上の文字色 */
+      --done-bg: #e6f5d0; /* 完了（時間経過）時の背景色 */
+      --pending-bg: #fff7d6; /* 予定（まだ終わってない）の背景色 */
+      --text: #0b1330; /* 基本文字色 */
+      --muted: #6b7280; /* 補助文字色 */
+      --danger: #ff6b6b; /* エラー（入力ミス等） */
+      --shadow: 0 6px 20px rgba(10,20,40,0.08); /* 影 */
+    }
+
+    /* ページ全体*/
+    html,body{height:100%;}
+    body{font-family: Inter, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif; background:var(--bg); color:var(--text); margin:0; padding:24px;}
+
+    /* コンテナ */
+    .container{max-width:880px; margin:0 auto;}
+
+    /* ヘッダの見出し */
+    header{display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;}
+    h1{font-size:1.25rem; margin:0;}
+    p.lead{margin:0; color:var(--muted); font-size:0.9rem;}
+
+    /* 入力エリアのカード */
+    .card{background:var(--card); padding:16px; border-radius:12px; box-shadow:var(--shadow);}
+    .controls{display:flex; gap:12px; align-items:center; flex-wrap:wrap;}
+    .controls .left{flex:1; min-width:220px;}
+
+    /* 時間入力 */
+    label{display:block; font-size:0.85rem; color:var(--muted); margin-bottom:6px;}
+    input[type="time"], input[type="number"], textarea{width:100%; padding:10px; border-radius:8px; border:1px solid #e6e9ef; box-sizing:border-box; font-size:0.95rem;}
+    textarea{min-height:72px; resize:vertical;}
+
+    /* 分刻みボタン */
+    .durations{display:flex; gap:8px; margin-top:8px;}
+    .btn{padding:8px 12px; border-radius:8px; border:none; cursor:pointer; font-weight:600; background:transparent;}
+    .btn.primary{background:var(--accent); color:var(--accent-contrast);}
+    .btn.outline{border:1px solid #dfe7f3;}
+
+    /* 追加ボタン */
+    .add-wrap{display:flex; gap:8px; align-items:center;}
+
+    /* スケジュールリスト */
+    .tabs{display:flex; gap:8px; margin:16px 0;}
+    .tab{padding:8px 12px; border-radius:8px; cursor:pointer; border:1px solid transparent; background:transparent;}
+    .tab.active{background:var(--accent); color:var(--accent-contrast);}
+
+    .list{margin-top:12px; display:flex; flex-direction:column; gap:10px;}
+    .item{display:flex; gap:12px; align-items:center; padding:10px; border-radius:10px; background:linear-gradient(180deg,#fff,#fbfbff); border:1px solid #eef2ff;}
+    .meta{min-width:140px; font-size:0.9rem; color:var(--muted);}
+    .content{flex:1;}
+    .time{font-weight:700;}
+
+    /* 完了・未完了の背景 */
+    .item.pending{background:var(--pending-bg);}
+    .item.done{background:var(--done-bg); opacity:0.9;}
+
+    /* フッター */
+    footer{margin-top:18px; color:var(--muted); font-size:0.85rem;}
+
+    /* レスポンシブ */
+    @media (max-width:640px){.controls{flex-direction:column;} .meta{min-width:120px}}

@@ -1,0 +1,104 @@
+<!--
+シンプルなWebスケジューラー（単一HTMLファイル）
+- 目的: 5分 / 25分 / 45分ボタンで所要時間を選び、開始時間・内容を入力して追加
+- 機能:
+  1) 5,25,45分刻みのボタンで所要時間を選択可能
+  2) 開始時間を入力する欄（time入力）
+  3) 内容を入力するテキスト欄
+  4) 追加ボタンで開始時間順に並べて表示
+  5) 終了時間を過ぎると色が変わる（視認性あり）
+  6) 今日・明日・翌日の3日分をローカルストレージに保存
+  7) CSS変数で色をまとめて管理し、あとで簡単に変更可能
+- コメントは1行ずつ丁寧に追加しています。あとで色を変えたいときは:root の変数を編集してください。
+-->
+
+<!doctype html>
+<html lang="ja">
+<head>
+ 
+  <meta charset="utf-8" />
+  <!-- レスポンシブのためのviewport設定 -->
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet"  href="skj.css" type="text/css"/>
+  
+  
+  <title>シンプルタイムスケジューラー</title>
+  
+  
+  <style>
+ 
+  </style>
+</head>
+<body>
+  <!-- メインコンテナ -->
+  <div class="container">
+    <!-- ヘッダ: タイトルと説明 -->
+    <header>
+      <div>
+        <!-- ページタイトル -->
+        <h1>シンプルタイムスケジューラー</h1>
+        <!-- 簡単な説明 -->
+        <p class="lead">開始時間・内容を入力して追加してください。3日分を保存します。</p>
+      </div>
+      <div>
+        <!-- 現在時刻を表示（動的更新） -->
+        <div id="now" style="text-align:right; color:var(--muted); font-size:0.95rem;"></div>
+      </div>
+    </header>
+
+    <!-- 入力カード -->
+    <div class="card" style="margin-bottom:12px;">
+      <!-- 入力フォーム領域 -->
+      <div class="controls">
+        <!-- 左側: 時間入力 -->
+        <div class="left">
+          <!-- ラベル: 開始時間 -->
+          <label for="startTime">開始時間</label>
+          <!-- 開始時間用のinput（time型） -->
+          <input id="startTime" type="time" />
+
+          <!-- 所要時間-->
+          <div class="durations">
+            <button class="btn outline" data-min="5">+5分</button>
+            <button class="btn outline" data-min="25">+25分</button>
+            <button class="btn outline" data-min="45">+45分</button>
+            <!-- 手動入力 -->
+            <input id="durationManual" type="number" min="1" max="1440" placeholder="分（手入力）" style="width:140px;" />
+          </div>
+        </div>
+
+        <!-- 右側: 内容入力と追加ボタン -->
+        <div style="flex:1;">
+          <!-- ラベル: 内容 -->
+          <label for="contentInput">内容</label>
+          <!-- テキスト-->
+          <textarea id="contentInput" placeholder="やることを入力してください"></textarea>
+
+          <!-- 追加ボタン行 -->
+          <div style="display:flex; gap:8px; margin-top:8px; justify-content:flex-end; align-items:center;">
+            <!-- 追加ボタン -->
+            <button id="addBtn" class="btn primary">追加</button>
+            <!-- エラーメッセージ表示用 -->
+            <div id="error" style="color:var(--danger); font-size:0.9rem;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 日付タブ（3日分） -->
+    <div class="tabs" id="dayTabs"></div>
+
+    <!-- スケジュールリスト -->
+    <div class="list card" id="scheduleList" style="margin-top:4px;"></div>
+
+    <!-- フッターに操作説明 -->
+    <footer>
+      <!-- 説明: 保存は自動でローカルストレージへ -->
+      <div>保存は自動でブラウザのローカルストレージに行われます。別の端末で見るにはGitHub等に配置してください。</div>
+    </footer>
+  </div>
+
+  
+ <script type="text/javascript" src="skj.js"></script>
+</body>
+</html>
